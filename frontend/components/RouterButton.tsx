@@ -11,7 +11,7 @@ interface ModalProps {
 const RouterButton: FC<ModalProps> = ({ href, key, type, children }) => {
   const router = useRouter();
   return (
-    <Button key={key} type={type} onClick={() => router.push(href)}>
+    <Button key={key} type={type} onClick={() => router.push(href)} style={{ margin: '10px' }}>
       {children}
     </Button>
   );

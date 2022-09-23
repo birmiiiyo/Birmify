@@ -1,7 +1,6 @@
 import { Button, Layout, Menu } from 'antd';
 import { FC, useState } from 'react';
 const { Sider, Content } = Layout;
-import 'antd/dist/antd.css';
 import { useRouter } from 'next/router';
 import MenuItem from 'antd/lib/menu/MenuItem';
 

@@ -1,10 +1,10 @@
-import { Layout, PageHeader } from 'antd';
-import 'antd/dist/antd.css';
-import { FC } from 'react';
-import 'antd/dist/antd.css';
+import { Button, Layout, PageHeader } from 'antd';
+
+import { FC, useState } from 'react';
 import RouterButton from '../../components/RouterButton';
 import { ITrack } from '../../models/Track';
 import TrackList from '../../components/TrackList';
+import Turntable from '../../components/PlayButton';
 
 const tracks: ITrack[] = [
   {
@@ -43,6 +43,8 @@ const tracks: ITrack[] = [
 ];
 
 const Tracks: FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   return (
     <Layout style={{ maxWidth: '1000px', margin: '0 auto' }}>
       <PageHeader
@@ -53,7 +55,7 @@ const Tracks: FC = () => {
           </RouterButton>,
         ]}
       />
-      <TrackList tracks={tracks} />
+      <TrackList tracks={tracks} loading={loading} />
     </Layout>
   );
 };
