@@ -1,8 +1,9 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Avatar, List, Row } from 'antd';
+import { Avatar, Button, List, Row } from 'antd';
 import { FC, useState } from 'react';
 import { ITrack } from '../models/Track';
-import Turntable from './PlayButton';
+import Player from './Player';
+import Turntable from './Player';
 import RouterButton from './RouterButton';
 interface TrackListProps {
   tracks: ITrack[];
@@ -10,7 +11,6 @@ interface TrackListProps {
 }
 
 const TrackList: FC<TrackListProps> = ({ tracks, loading }) => {
-  const [play, setPlay] = useState<boolean>(false);
   return (
     <List
       bordered
@@ -21,7 +21,7 @@ const TrackList: FC<TrackListProps> = ({ tracks, loading }) => {
       renderItem={(item) => (
         <List.Item
           actions={[
-            <Turntable key={7} active={play} />,
+            <Player key={7} />,
             <RouterButton key={3} type="primary" href={`/tracks/${item._id}`}>
               {' '}
               Перейти к треку

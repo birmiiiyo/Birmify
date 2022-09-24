@@ -4,7 +4,7 @@ import { FC, useState } from 'react';
 import RouterButton from '../../components/RouterButton';
 import { ITrack } from '../../models/Track';
 import TrackList from '../../components/TrackList';
-import Turntable from '../../components/PlayButton';
+import Turntable from '../../components/Player';
 
 const tracks: ITrack[] = [
   {

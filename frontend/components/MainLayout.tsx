@@ -1,8 +1,9 @@
-import { Button, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import { FC, useState } from 'react';
 const { Sider, Content } = Layout;
 import { useRouter } from 'next/router';
 import MenuItem from 'antd/lib/menu/MenuItem';
+import Player from './Player';
 
 const items = [
   { key: 1, label: 'Авторизация', disabled: true },
@@ -40,6 +41,7 @@ const MainLayout: FC<LayoutProps> = ({ children }) => {
       >
         {children}
       </Content>
+      <Player />
     </Layout>
   );
 };

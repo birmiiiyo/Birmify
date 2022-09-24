@@ -1,8 +1,8 @@
 import { Button, Form, Input, message, Steps } from 'antd';
 import { FC, useState } from 'react';
 import TrackData from '../../components/steps/TrackData';
-import TrackMusic from '../../components/steps/TrackMusic';
-import TrackPic from '../../components/steps/TrackPic';
+import TrackPic from '../../components/steps/FileUpload';
+import FileUpload from '../../components/steps/FileUpload';
 
 const { Step } = Steps;
 
@@ -20,6 +20,8 @@ const steps = [
 
 const AddTrack: FC = () => {
   const [current, setCurrent] = useState(0);
+  const [picture, setPicture] = useState(null);
+  const [audio, setAudio] = useState(null);
 
   const repeat = () => {
     message.success('Processing complete!');
@@ -37,8 +39,16 @@ const AddTrack: FC = () => {
       <div className="steps-content">
         {' '}
         {current === 0 && <TrackData />}
-        {current === 1 && <TrackPic />}
-        {current === 2 && <TrackMusic />}
+        {current === 1 && (
+          <FileUpload setFile={setPicture} accept="image/*">
+            Загрузите обложку
+          </FileUpload>
+        )}
+        {current === 2 && (
+          <FileUpload setFile={setAudio} accept="audio/*">
+            Загрузите аудио
+          </FileUpload>
+        )}
       </div>
       <div className="steps-action">
         {current < steps.length - 1 && (
