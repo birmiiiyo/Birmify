@@ -37,6 +37,7 @@ const MainLayout: FC<LayoutProps> = ({ children }) => {
       <Content
         style={{
           padding: '20px',
+          marginBottom: '60px',
         }}
       >
         {children}

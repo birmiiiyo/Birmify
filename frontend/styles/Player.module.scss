@@ -1,11 +1,12 @@
 .player {
   height: 60px;
   width: 60%;
-  left: 20%;
+  left: 25%;
   position: fixed;
   bottom: 0;
   display: flex;
   align-items: center;
-  padding: 5px 30px;
-  background-color: lightgray;
+  padding: 10px 30px;
+  border: 2px solid gray;
+  margin-bottom: 5px;
 }

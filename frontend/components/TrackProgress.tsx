@@ -4,13 +4,13 @@ interface TrackProgressProps {
   left: number;
   right: number;
   margin: string;
-  onChange: (e) => void;
+  onChange: (e: any) => void;
 }
 
 const TrackProgress: FC<TrackProgressProps> = ({ left, right, onChange, margin }) => {
   return (
     <div style={{ marginLeft: margin }}>
-      <input type="range" max={right} min={left} value={left} onChange={onChange} />
+      <input type="range" max={right} min={0} value={left} onChange={onChange} />
       <div>
         {' '}
         {left}/{right}

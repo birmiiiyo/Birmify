@@ -1,27 +1,46 @@
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { Avatar, Button, List, Row } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { ITrack } from '../models/Track';
-import Player from './Player';
-import Turntable from './Player';
-import RouterButton from './RouterButton';
-interface TrackListProps {
-  tracks: ITrack[];
-  loading: boolean;
-}
+import { getTracks } from '../store/actions/getTracks';
+import { useAppDispatch, useAppSelector } from '../store/ReduxHook';
+import { PlayerSlice } from '../store/slices/PlayerSlice';
+import { trackSlice } from '../store/slices/TrackSlice';
 
-const TrackList: FC<TrackListProps> = ({ tracks, loading }) => {
+import RouterButton from './RouterButton';
+
+const TrackList: FC = () => {
+  const dispatch = useAppDispatch();
+  const { Error, isLoading, tracks } = useAppSelector((state) => state.TrackReducer);
+  const { active } = useAppSelector((state) => state.PlayerReducer);
+  const {} = useAppSelector((state) => state.PlayerReducer);
+  const { setActive, setPlay } = PlayerSlice.actions;
+
+  useEffect(() => {
+    dispatch(getTracks());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <List
       bordered
-      loading={loading}
+      loading={isLoading}
       size="large"
       itemLayout="horizontal"
       dataSource={tracks}
       renderItem={(item) => (
         <List.Item
           actions={[
-            <Player key={7} />,
+            <Button
+              key={3242}
+              type="text"
+              disabled={active === item ? true : false}
+              onClick={() => {
+                dispatch(setActive(item));
+                dispatch(setPlay());
+              }}
+            >
+              {active === item ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
+            </Button>,
             <RouterButton key={3} type="primary" href={`/tracks/${item._id}`}>
               {' '}
               Перейти к треку

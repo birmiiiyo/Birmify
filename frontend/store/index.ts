@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import PlayerReducer from './slices/PlayerSlice';
+import TrackReducer from './slices/TrackSlice';
 
 const rootReducer = combineReducers({
   PlayerReducer,
+  TrackReducer,
 });
 
 export const setupStore = () => {

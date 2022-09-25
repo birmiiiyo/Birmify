@@ -4,47 +4,14 @@ import { FC, useState } from 'react';
 import RouterButton from '../../components/RouterButton';
 import { ITrack } from '../../models/Track';
 import TrackList from '../../components/TrackList';
-import Turntable from '../../components/Player';
-
-const tracks: ITrack[] = [
-  {
-    _id: '6329c6eeaadf145d3f3a4670',
-    title: 'BirmiiiYo',
-    author: 'BirmiiiYo',
-    text: 'BirmiiiYo',
-    listens: 0,
-    comments: [],
-    __v: 0,
-    audio: 'zxc',
-    picture: 'zxc',
-  },
-  {
-    _id: '6329cdedbaf434d900efd312',
-    title: 'BirmiiiYo 1 ',
-    author: 'BirmiiiYo 1',
-    text: 'BirmiiiYo 1 ',
-    listens: 0,
-    comments: [],
-    __v: 0,
-    audio: 'zxc',
-    picture: 'zxc',
-  },
-  {
-    _id: '6329d4ba0ddbb87957f6caec',
-    title: '123',
-    author: '456',
-    text: '789',
-    listens: 0,
-    comments: [],
-    __v: 0,
-    audio: 'zxc',
-    picture: 'zxc',
-  },
-];
+import { useAppSelector } from '../../store/ReduxHook';
 
 const Tracks: FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { Error } = useAppSelector((state) => state.TrackReducer);
 
+  if (Error) {
+    <h1>{Error}</h1>;
+  }
   return (
     <Layout style={{ maxWidth: '1000px', margin: '0 auto' }}>
       <PageHeader
@@ -55,7 +22,7 @@ const Tracks: FC = () => {
           </RouterButton>,
         ]}
       />
-      <TrackList tracks={tracks} loading={loading} />
+      <TrackList />
     </Layout>
   );
 };
