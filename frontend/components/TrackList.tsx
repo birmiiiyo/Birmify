@@ -1,11 +1,9 @@
 import { DeleteOutlined, PauseCircleOutlined, PlayCircleOutlined } from '@ant-design/icons';
-import { Avatar, Button, List, Row } from 'antd';
+import { Avatar, Button, List } from 'antd';
 import { FC, useEffect } from 'react';
-import { ITrack } from '../models/Track';
 import { getTracks } from '../store/actions/getTracks';
-import { useAppDispatch, useAppSelector } from '../store/ReduxHook';
+import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
-import { trackSlice } from '../store/slices/TrackSlice';
 
 import RouterButton from './RouterButton';
 
@@ -49,7 +47,7 @@ const TrackList: FC = () => {
           ]}
         >
           <List.Item.Meta
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+            avatar={<Avatar src={'http://localhost:5000/' + item?.picture} />}
             title={item.title}
             description={item.author}
           />

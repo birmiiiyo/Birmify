@@ -2,7 +2,7 @@ import { PauseCircleOutlined, PlayCircleOutlined, SoundOutlined } from '@ant-des
 import { Button, Col, Divider, Grid, Row } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { ITrack } from '../models/Track';
-import { useAppDispatch, useAppSelector } from '../store/ReduxHook';
+import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
 import styles from '../styles/Player.module.scss';
 import TrackProgress from './TrackProgress';

@@ -1,54 +1,38 @@
-import { Button, Form, Input } from 'antd';
-import React, { FC, ReactNode } from 'react';
-import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { message, Upload } from 'antd';
-import type { UploadChangeParam } from 'antd/es/upload';
-import type { UploadFile } from 'antd/es/upload/interface';
-import { InboxOutlined } from '@ant-design/icons';
-import type { UploadProps } from 'antd';
-
-const { Dragger } = Upload;
-
-interface TrackPicProps {
-  children: ReactNode;
+import { CheckCircleOutlined, DownloadOutlined } from '@ant-design/icons';
+import React, { useRef, useState } from 'react';
+import styles from '../../styles/FileUpload.module.scss';
+interface FileUploadProps {
   setFile: Function;
   accept: string;
+  children: React.ReactNode;
 }
-const props: UploadProps = {
-  name: 'file',
-  multiple: true,
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log('Dropped files', e.dataTransfer.files);
-  },
-};
 
-const FileUpload: FC<TrackPicProps> = ({ accept, setFile, children }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ setFile, accept, children }) => {
+  const [install, setInstall] = useState<boolean>(false);
+  const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      setFile(e.target.files[0]);
+      setInstall(true);
+    }
+  };
+
   return (
-    <>
-      <h2>{children}</h2>
-      <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-          <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibit from uploading company data or
-          other band files
-        </p>
-      </Dragger>
-    </>
+    <div onClick={() => ref.current?.click()} className={styles.block}>
+      <input
+        type="file"
+        accept={accept}
+        style={{ display: 'none' }}
+        ref={ref}
+        onChange={onChange}
+      />
+      <div>
+        <h3>{children}</h3>
+        {install ? <CheckCircleOutlined /> : <DownloadOutlined />}
+      </div>
+    </div>
   );
 };
+
 export default FileUpload;

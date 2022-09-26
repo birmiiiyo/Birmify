@@ -3,6 +3,9 @@ import { FC, useState } from 'react';
 import TrackData from '../../components/steps/TrackData';
 import TrackPic from '../../components/steps/FileUpload';
 import FileUpload from '../../components/steps/FileUpload';
+import { useInput } from '../../hooks/useInput';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const { Step } = Steps;
 
@@ -20,11 +23,25 @@ const steps = [
 
 const AddTrack: FC = () => {
   const [current, setCurrent] = useState(0);
-  const [picture, setPicture] = useState(null);
-  const [audio, setAudio] = useState(null);
-
-  const repeat = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [picture, setPicture] = useState<any>(null);
+  const [audio, setAudio] = useState<any>(null);
+  const title = useInput('');
+  const author = useInput('');
+  const text = useInput('');
+  const router = useRouter();
+  const complete = () => {
     message.success('Processing complete!');
+    const formData = new FormData();
+    formData.append('title', title.value);
+    formData.append('text', text.value);
+    formData.append('author', author.value);
+    formData.append('picture', picture);
+    formData.append('audio', audio);
+    axios
+      .post('http://localhost:5000/tracks', formData)
+      .then(() => router.push('/tracks'))
+      .catch((e) => console.log(e));
     setCurrent(0);
   };
 
@@ -38,7 +55,27 @@ const AddTrack: FC = () => {
       </Steps>
       <div className="steps-content">
         {' '}
-        {current === 0 && <TrackData />}
+        {current === 0 && (
+          <Form
+            name="wrap"
+            labelCol={{ flex: '200px' }}
+            labelAlign="right"
+            labelWrap
+            wrapperCol={{ flex: '500px' }}
+            colon={false}
+          >
+            <Form.Item label="Название трека" name="title" rules={[{ required: true }]}>
+              <Input {...title} />
+            </Form.Item>
+
+            <Form.Item label="Исполнитель" name="author" rules={[{ required: true }]}>
+              <Input {...author} />
+            </Form.Item>
+            <Form.Item label="Текст песни" name="text" rules={[{ required: false }]}>
+              <Input {...text} />
+            </Form.Item>
+          </Form>
+        )}
         {current === 1 && (
           <FileUpload setFile={setPicture} accept="image/*">
             Загрузите обложку
@@ -57,7 +94,7 @@ const AddTrack: FC = () => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button type="primary" onClick={repeat}>
+          <Button type="primary" onClick={complete}>
             Закончить
           </Button>
         )}

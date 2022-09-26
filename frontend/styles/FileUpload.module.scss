@@ -1,0 +1,12 @@
+.block {
+  width: 60%;
+  height: 400px;
+  background-color: rgb(225, 240, 235);
+  border: 2px solid rgb(57, 56, 56);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 15px 20px rgba(0, 0, 0, 0.2);
+}

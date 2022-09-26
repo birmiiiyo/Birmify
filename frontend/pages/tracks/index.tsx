@@ -4,7 +4,7 @@ import { FC, useState } from 'react';
 import RouterButton from '../../components/RouterButton';
 import { ITrack } from '../../models/Track';
 import TrackList from '../../components/TrackList';
-import { useAppSelector } from '../../store/ReduxHook';
+import { useAppSelector } from '../../hooks/Redux';
 
 const Tracks: FC = () => {
   const { Error } = useAppSelector((state) => state.TrackReducer);
