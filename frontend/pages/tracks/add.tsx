@@ -7,6 +7,7 @@ import { useInput } from '../../hooks/useInput';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import RouterButton from '../../components/RouterButton';
+import Head from 'next/head';
 
 const { Step } = Steps;
 
@@ -48,6 +49,10 @@ const AddTrack: FC = () => {
 
   return (
     <>
+ 
+      <Head>
+        <title>Добавление песни</title>
+      </HeaD>
       <RouterButton href="/tracks" key={325253} type="primary">
         Назад
       </RouterButton>

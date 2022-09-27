@@ -6,18 +6,20 @@ import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
 
 import RouterButton from './RouterButton';
-
-const TrackList: FC = () => {
+interface TrackListProps {
+  query: string;
+}
+const TrackList: FC<TrackListProps> = ({ query }) => {
   const dispatch = useAppDispatch();
-  const { Error, isLoading, tracks } = useAppSelector((state) => state.TrackReducer);
+  const { isLoading, tracks } = useAppSelector((state) => state.TrackReducer);
   const { active } = useAppSelector((state) => state.PlayerReducer);
   const {} = useAppSelector((state) => state.PlayerReducer);
   const { setActive, setPlay } = PlayerSlice.actions;
 
   useEffect(() => {
     dispatch(getTracks());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
+
   return (
     <List
       bordered

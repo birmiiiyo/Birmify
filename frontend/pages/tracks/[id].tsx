@@ -8,6 +8,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import { useInput } from '../../hooks/useInput';
 import Item from 'antd/lib/list/Item';
+import Head from 'next/head';
 
 interface TrackProps {
   serverTrack: ITrack;
@@ -36,7 +37,9 @@ const Track: FC<TrackProps> = ({ serverTrack }) => {
   track.comments?.map((item) => console.log(item.username));
   return (
     <>
-      {' '}
+      <Head>
+        <title>{track.title}</title>
+      </Head>{' '}
       <RouterButton key={5} href="/tracks" type="primary">
         К списку
       </RouterButton>
