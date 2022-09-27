@@ -11,7 +11,7 @@ import { Model, ObjectId } from 'mongoose';
 export class TrackService {
   constructor(
     @InjectModel(Track.name) private TrackModel: Model<TrackDocument>,
-    @InjectModel(Comment.name) private CommentkModel: Model<CommentDocument>,
+    @InjectModel(Comment.name) private CommentModel: Model<CommentDocument>,
     private fileService: FileService,
   ) {}
 
@@ -50,7 +50,7 @@ export class TrackService {
   }
   async addComment(dto: CreateCommentDto): Promise<Comment> {
     const track = await this.TrackModel.findById(dto.trackId);
-    const newComment = await this.CommentkModel.create({ ...dto });
+    const newComment = await this.CommentModel.create({ ...dto });
     track?.comments.push(newComment._id);
     await track?.save();
     return newComment;

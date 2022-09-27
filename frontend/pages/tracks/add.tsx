@@ -6,6 +6,7 @@ import FileUpload from '../../components/steps/FileUpload';
 import { useInput } from '../../hooks/useInput';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import RouterButton from '../../components/RouterButton';
 
 const { Step } = Steps;
 
@@ -47,6 +48,9 @@ const AddTrack: FC = () => {
 
   return (
     <>
+      <RouterButton href="/tracks" key={325253} type="primary">
+        Назад
+      </RouterButton>
       <h1>Загрузка трека</h1>{' '}
       <Steps current={current}>
         {steps.map((item) => (
