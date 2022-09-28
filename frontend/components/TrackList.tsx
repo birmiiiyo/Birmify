@@ -6,10 +6,9 @@ import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
 
 import RouterButton from './RouterButton';
-interface TrackListProps {
-  query: string;
-}
-const TrackList: FC<TrackListProps> = ({ query }) => {
+import { getTotal } from '../store/actions/getTotal';
+
+const TrackList: FC = () => {
   const dispatch = useAppDispatch();
   const { isLoading, tracks } = useAppSelector((state) => state.TrackReducer);
   const { active } = useAppSelector((state) => state.PlayerReducer);
@@ -18,12 +17,12 @@ const TrackList: FC<TrackListProps> = ({ query }) => {
 
   useEffect(() => {
     dispatch(getTracks());
+    dispatch(getTotal());
   });
 
   return (
     <List
       bordered
-      loading={isLoading}
       size="large"
       itemLayout="horizontal"
       dataSource={tracks}

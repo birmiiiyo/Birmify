@@ -49,10 +49,9 @@ const AddTrack: FC = () => {
 
   return (
     <>
- 
       <Head>
         <title>Добавление песни</title>
-      </HeaD>
+      </Head>
       <RouterButton href="/tracks" key={325253} type="primary">
         Назад
       </RouterButton>

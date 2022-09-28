@@ -36,6 +36,10 @@ export class TrackService {
       .limit(count);
     return tracks;
   }
+  async getCount(): Promise<number> {
+    const total = await this.TrackModel.find().count();
+    return total;
+  }
   async search(q = ''): Promise<Track[]> {
     const tracks = await this.TrackModel.find({
       title: { $regex: new RegExp(q, 'i') },

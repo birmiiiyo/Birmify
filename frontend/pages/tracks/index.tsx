@@ -7,19 +7,10 @@ import TrackList from '../../components/TrackList';
 import { useAppSelector } from '../../hooks/Redux';
 import Head from 'next/head';
 import Input from 'antd/lib/input/Input';
-import { useDispatch } from 'react-redux';
-import { searchTracks } from '../../store/actions/searchTrack';
+import PaginationComponent from '../../components/Pagination';
 
 const Tracks: FC = () => {
-  const dispatch = useDispatch();
   const { Error } = useAppSelector((state) => state.TrackReducer);
-  const [query, setQuery] = useState<string>('');
-  const search = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    // useEffect(() => {
-    //   dispatch(searchTracks(query));
-    // }, [query]);
-  };
 
   if (Error) {
     <h1>{Error}</h1>;
@@ -38,8 +29,9 @@ const Tracks: FC = () => {
             </RouterButton>,
           ]}
         />
-        <Input value={query} onChange={search} style={{ width: '60%', margin: '10px auto' }} />
-        <TrackList query={query} />
+
+        <TrackList />
+        <PaginationComponent />
       </Layout>
     </>
   );
