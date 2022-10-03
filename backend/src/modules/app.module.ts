@@ -1,6 +1,7 @@
-import { FileModule } from './file/file.module';
+import { AlbumModule } from './album.module';
+import { TrackModule } from './track.module';
+import { FileModule } from './file.module';
 import { ConfigModule } from '@nestjs/config';
-import { TrackModule } from './track/track.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -15,6 +16,7 @@ import * as path from 'path';
     MongooseModule.forRoot(`${process.env.MONGODB_URL}`),
     TrackModule,
     FileModule,
+    AlbumModule,
   ],
 })
 export class AppModule {}

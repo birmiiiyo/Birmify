@@ -24,5 +24,4 @@ export class FileService {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-  deleteFile(fileName: string) {}
 }

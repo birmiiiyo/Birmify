@@ -1,8 +1,8 @@
-import { FileService, FileType } from './../file/file.service';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { CreateTrackDto } from './dto/create-track.dto';
-import { Comment, CommentDocument } from './models/comment.schema';
-import { Track, TrackDocument } from './models/track.schema';
+import { FileService, FileType } from './file.service';
+import { CreateCommentDto } from '../dto/create-comment.dto';
+import { CreateTrackDto } from '../dto/create-track.dto';
+import { Comment, CommentDocument } from '../models/comment.schema';
+import { Track, TrackDocument } from '../models/track.schema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
@@ -40,12 +40,12 @@ export class TrackService {
     const total = await this.TrackModel.find().count();
     return total;
   }
-  async search(q = ''): Promise<Track[]> {
-    const tracks = await this.TrackModel.find({
-      title: { $regex: new RegExp(q, 'i') },
-    });
-    return tracks;
-  }
+  // async search(q = ''): Promise<Track[]> {
+  //   const tracks = await this.TrackModel.find({
+  //     title: { $regex: new RegExp(q, 'i') },
+  //   });
+  //   return tracks;
+  // }
   async getOne(id: ObjectId) {
     const track = await this.TrackModel.findById(id).populate('comments');
     return track;
@@ -54,16 +54,16 @@ export class TrackService {
     const track = await this.TrackModel.findByIdAndDelete(id);
     return track?._id;
   }
+  async newAudition(id: ObjectId): Promise<void> {
+    const track = (await this.TrackModel.findById(id)) as TrackDocument;
+    track.listens += 1;
+    track.save();
+  }
   async addComment(dto: CreateCommentDto): Promise<Comment> {
     const track = await this.TrackModel.findById(dto.trackId);
     const newComment = await this.CommentModel.create({ ...dto });
     track?.comments.push(newComment._id);
     await track?.save();
     return newComment;
-  }
-  async newAudition(id: ObjectId): Promise<void> {
-    const track = (await this.TrackModel.findById(id)) as TrackDocument;
-    track.listens += 1;
-    track.save();
   }
 }

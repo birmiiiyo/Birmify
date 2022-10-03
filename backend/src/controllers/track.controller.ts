@@ -1,7 +1,7 @@
-import { CreateCommentDto } from './dto/create-comment.dto';
+import { TrackService } from './../services/track.service';
+import { CreateTrackDto } from './../dto/create-track.dto';
+import { CreateCommentDto } from './../dto/create-comment.dto';
 import { ObjectId } from 'mongoose';
-import { CreateTrackDto } from './dto/create-track.dto';
-import { TrackService } from './track.service';
 import {
   Body,
   Controller,
@@ -46,10 +46,10 @@ export class TrackController {
   getCount() {
     return this.trackService.getCount();
   }
-  @Get()
-  search(@Query('q') q: string) {
-    return this.trackService.search(q);
-  }
+  // @Get()
+  // search(@Query('q') q: string) {
+  //   return this.trackService.search(q);
+  // }
   @Get(':id')
   getOne(@Param('id') id: ObjectId) {
     return this.trackService.getOne(id);
