@@ -2,11 +2,9 @@ import { Button, Layout, PageHeader } from 'antd';
 
 import React, { FC, useEffect, useState } from 'react';
 import RouterButton from '../../components/RouterButton';
-import { ITrack } from '../../models/Track';
 import TrackList from '../../components/TrackList';
 import { useAppSelector } from '../../hooks/Redux';
 import Head from 'next/head';
-import Input from 'antd/lib/input/Input';
 import PaginationComponent from '../../components/Pagination';
 
 const Tracks: FC = () => {
@@ -29,9 +27,8 @@ const Tracks: FC = () => {
             </RouterButton>,
           ]}
         />
-
         <TrackList />
-        <PaginationComponent />
+        {/*  <PaginationComponent /> */}
       </Layout>
     </>
   );

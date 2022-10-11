@@ -17,7 +17,7 @@ const TrackList: FC = () => {
 
   useEffect(() => {
     dispatch(getTracks());
-    dispatch(getTotal());
+    //  dispatch(getTotal());
   });
 
   return (

@@ -7,6 +7,7 @@ const PaginationComponent: React.FC = () => {
   const dispatch = useAppDispatch();
   const { setActivePage } = PaginationSlice.actions;
   const { PerPage, activePage, total } = useAppSelector((state) => state.PaginationReducer);
+  console.log(total, PerPage, activePage);
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setActivePage(page);

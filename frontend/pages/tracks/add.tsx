@@ -1,7 +1,5 @@
 import { Button, Form, Input, message, Steps } from 'antd';
 import { FC, useState } from 'react';
-import TrackData from '../../components/steps/TrackData';
-import TrackPic from '../../components/steps/FileUpload';
 import FileUpload from '../../components/steps/FileUpload';
 import { useInput } from '../../hooks/useInput';
 import { useRouter } from 'next/router';
@@ -25,13 +23,13 @@ const steps = [
 
 const AddTrack: FC = () => {
   const [current, setCurrent] = useState(0);
-  const [activeStep, setActiveStep] = useState(0);
   const [picture, setPicture] = useState<any>(null);
   const [audio, setAudio] = useState<any>(null);
   const title = useInput('');
   const author = useInput('');
   const text = useInput('');
   const router = useRouter();
+
   const complete = () => {
     message.success('Processing complete!');
     const formData = new FormData();
