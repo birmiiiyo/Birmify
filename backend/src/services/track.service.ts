@@ -40,12 +40,7 @@ export class TrackService {
     const total = await this.TrackModel.find().count();
     return total;
   }
-  // async search(q = ''): Promise<Track[]> {
-  //   const tracks = await this.TrackModel.find({
-  //     title: { $regex: new RegExp(q, 'i') },
-  //   });
-  //   return tracks;
-  // }
+
   async getOne(id: ObjectId) {
     const track = await this.TrackModel.findById(id).populate('comments');
     return track;

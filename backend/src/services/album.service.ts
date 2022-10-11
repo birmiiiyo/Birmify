@@ -1,3 +1,5 @@
+import { Track, TrackDocument } from './../models/track.schema';
+import { addTrackDto } from './../dto/add-track.dto';
 import { CreateAlbumDto } from './../dto/create-album.dto';
 import { AlbumDocument } from './../models/album.schema';
 import { Injectable } from '@nestjs/common';
@@ -9,12 +11,14 @@ import { Album } from 'src/models/album.schema';
 export class AlbumService {
   constructor(
     @InjectModel(Album.name) private AlbumModel: Model<AlbumDocument>,
+    @InjectModel(Track.name) private TrackModel: Model<TrackDocument>,
   ) {}
 
   async create(dto: CreateAlbumDto): Promise<Album> {
     const album = await this.AlbumModel.create({
       ...dto,
       likes: 0,
+      tracks: [],
     });
     return album;
   }
@@ -24,16 +28,23 @@ export class AlbumService {
       .limit(count);
     return albums;
   }
-  async getCount(): Promise<number> {
-    const total = await this.AlbumModel.find().count();
-    return total;
-  }
   async getOne(id: ObjectId) {
     const album = await this.AlbumModel.findById(id).populate('tracks');
     return album;
   }
+  async getCount(): Promise<number> {
+    const total = await this.AlbumModel.find().count();
+    return total;
+  }
   async delete(id: ObjectId): Promise<ObjectId> {
     const album = await this.AlbumModel.findByIdAndDelete(id);
+    return album?._id;
+  }
+  async addTrack(dto: addTrackDto): Promise<ObjectId> {
+    const album = await this.AlbumModel.findById(dto.albumId);
+    const track = await this.TrackModel.findById(dto.trackId);
+    album?.tracks.push(track?._id);
+    await album?.save();
     return album?._id;
   }
 }

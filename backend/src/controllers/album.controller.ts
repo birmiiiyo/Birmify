@@ -1,6 +1,16 @@
+import { addTrackDto } from './../dto/add-track.dto';
+import { ObjectId } from 'mongoose';
 import { CreateAlbumDto } from './../dto/create-album.dto';
 import { AlbumService } from './../services/album.service';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 
 @Controller('/albums')
 export class AlbumController {
@@ -16,5 +26,18 @@ export class AlbumController {
   @Get('/total')
   getCount() {
     return this.albumService.getCount();
+  }
+  @Get(':id')
+  getOne(@Param('id') id: ObjectId) {
+    return this.albumService.getOne(id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: ObjectId) {
+    return this.albumService.delete(id);
+  }
+  @Post('/tracks')
+  addTrack(@Body() dto: addTrackDto) {
+    return this.albumService.addTrack(dto);
   }
 }

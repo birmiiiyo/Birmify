@@ -46,10 +46,7 @@ export class TrackController {
   getCount() {
     return this.trackService.getCount();
   }
-  // @Get()
-  // search(@Query('q') q: string) {
-  //   return this.trackService.search(q);
-  // }
+
   @Get(':id')
   getOne(@Param('id') id: ObjectId) {
     return this.trackService.getOne(id);
