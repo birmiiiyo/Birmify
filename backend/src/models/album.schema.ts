@@ -13,7 +13,7 @@ export class Album {
   description: string;
   @Prop()
   likes: number;
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Album' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Track' }] })
   tracks: Track[];
 }
 

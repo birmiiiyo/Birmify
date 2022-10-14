@@ -40,11 +40,12 @@ export class AlbumService {
     const album = await this.AlbumModel.findByIdAndDelete(id);
     return album?._id;
   }
-  async addTrack(dto: addTrackDto): Promise<ObjectId> {
+  async addTrack(dto: addTrackDto): Promise<string> {
     const album = await this.AlbumModel.findById(dto.albumId);
     const track = await this.TrackModel.findById(dto.trackId);
+    if (album?.tracks.includes(track?._id)) return 'Трек уже есть в альбоме';
     album?.tracks.push(track?._id);
     await album?.save();
-    return album?._id;
+    return track?.title as string;
   }
 }
