@@ -40,7 +40,7 @@ const Track: FC<TrackProps> = ({ serverTrack }) => {
       <Head>
         <title>{track.title}</title>
       </Head>{' '}
-      <RouterButton key={5} href="/tracks" type="primary">
+      <RouterButton key="3gagsa" href="/tracks" type="primary">
         К списку
       </RouterButton>
       <Card title={'Названиe трекa: ' + track?.title} style={{ width: '100%' }}>

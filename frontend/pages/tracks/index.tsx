@@ -1,11 +1,10 @@
 import { Button, Layout, PageHeader } from 'antd';
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import RouterButton from '../../components/RouterButton';
 import TrackList from '../../components/TrackList';
 import { useAppSelector } from '../../hooks/Redux';
 import Head from 'next/head';
-import PaginationComponent from '../../components/Pagination';
 
 const Tracks: FC = () => {
   const { Error } = useAppSelector((state) => state.TrackReducer);
@@ -22,13 +21,12 @@ const Tracks: FC = () => {
         <PageHeader
           title="Треки"
           extra={[
-            <RouterButton key={1} href="tracks/add" type="primary">
+            <RouterButton key="faasf" href="tracks/add" type="primary">
               Добавить трек
             </RouterButton>,
           ]}
         />
-        <TrackList />
-        {/*  <PaginationComponent /> */}
+        {/* <TrackList /> */}
       </Layout>
     </>
   );

@@ -4,8 +4,7 @@ const { Sider, Content } = Layout;
 import { useRouter } from 'next/router';
 import MenuItem from 'antd/lib/menu/MenuItem';
 import Player from './Player';
-import Head from 'next/head';
-
+const { SubMenu } = Menu;
 const items = [
   { key: 1, label: 'Авторизация', disabled: true },
   { key: 2, label: 'Главная', disabled: false, href: '/' },

@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
 
 import RouterButton from './RouterButton';
-import { getTotal } from '../store/actions/getTotal';
 
 const TrackList: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +39,7 @@ const TrackList: FC = () => {
             >
               {active === item ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
             </Button>,
-            <RouterButton key={3} type="primary" href={`/tracks/${item._id}`}>
+            <RouterButton key="fsdfs2d" type="primary" href={`/tracks/${item._id}`}>
               {' '}
               Перейти к треку
             </RouterButton>,

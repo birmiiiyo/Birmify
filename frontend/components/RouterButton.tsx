@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { FC, ReactNode } from 'react';
 
 interface ModalProps {
-  key: number;
+  key: string;
   type: 'link' | 'text' | 'ghost' | 'primary' | 'default' | 'dashed' | undefined;
   children: ReactNode;
   href: string;
