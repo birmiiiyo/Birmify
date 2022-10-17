@@ -1,53 +1,26 @@
-import { FC, useState } from 'react';
-import { Button, Card, Input, List } from 'antd';
-import RouterButton from '../../components/RouterButton';
-import { DeleteOutlined } from '@ant-design/icons';
+import React, { FC } from 'react';
+import { Button } from 'antd';
+
 import { GetServerSideProps } from 'next';
-import { ITrack } from '../../models/Track';
+
 import axios from 'axios';
-import Image from 'next/image';
-import { useInput } from '../../hooks/useInput';
-import Item from 'antd/lib/list/Item';
-import Head from 'next/head';
+
 import { IAlbum } from '../../models/Album';
-import { useAppDispatch, useAppSelector } from '../../hooks/Redux';
-import { PlayerSlice } from '../../store/slices/PlayerSlice';
+import { TrackItem } from '../../components/TrackItem';
 
 interface TrackProps {
   album: IAlbum;
 }
 
 const Album: FC<TrackProps> = ({ album }) => {
-  console.log(album);
-  const dispatch = useAppDispatch();
-  const { isLoading, tracks } = useAppSelector((state) => state.TrackReducer);
-  const { active } = useAppSelector((state) => state.PlayerReducer);
-  const {} = useAppSelector((state) => state.PlayerReducer);
-  const { setActive, setPlay } = PlayerSlice.actions;
-
   return (
-    <>
-      <h2>{album.title}</h2>
+    <div>
+      <h1>{album.title}</h1>
       <span>{album.description}</span>
-      <div>
-        {album.tracks.map((item, i) => (
-          <div key={item._id + i}>
-            {item.title}
-            <Button
-              key={3242}
-              type="text"
-              disabled={active === item ? true : false}
-              onClick={() => {
-                dispatch(setActive(item));
-                dispatch(setPlay());
-              }}
-            >
-              play
-            </Button>
-          </div>
-        ))}
-      </div>
-    </>
+      {album.tracks.map((item) => (
+        <TrackItem key={item._id} {...item}></TrackItem>
+      ))}
+    </div>
   );
 };
 

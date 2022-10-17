@@ -10,7 +10,7 @@ const Tracks: FC = () => {
   const { Error } = useAppSelector((state) => state.TrackReducer);
 
   if (Error) {
-    <h1>{Error}</h1>;
+    return <h1>{Error}</h1>;
   }
   return (
     <>

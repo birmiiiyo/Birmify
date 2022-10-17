@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import RouterButton from '../../components/RouterButton';
 
 export default function create() {
   return (
@@ -7,7 +8,13 @@ export default function create() {
       <Head>
         <title>Создание альбома</title>
       </Head>
-      <h1>zxc</h1>
+      <RouterButton href="/albums" key="f423423432" type="primary">
+        Назад
+      </RouterButton>
+      <form>
+        <input type="text" />
+        <input type="submit" />
+      </form>
     </>
   );
 }
