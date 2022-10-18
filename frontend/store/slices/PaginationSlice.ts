@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { getTotal } from '../actions/getTotal';
 
 interface PaginationState {
@@ -19,6 +20,9 @@ export const PaginationSlice = createSlice({
   reducers: {
     setActivePage(state, action: PayloadAction<number>) {
       state.activePage = action.payload;
+    },
+    setItemPerPage(state, action: PayloadAction<number>) {
+      state.PerPage = action.payload;
     },
   },
   extraReducers: {

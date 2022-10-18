@@ -1,11 +1,14 @@
-import { Button, Form, Input, message, Steps } from 'antd';
 import { FC, useState } from 'react';
-import FileUpload from '../../components/steps/FileUpload';
-import { useInput } from '../../hooks/useInput';
-import { useRouter } from 'next/router';
 import axios from 'axios';
-import RouterButton from '../../components/RouterButton';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+
+import { Button, Form, Input, message, Steps } from 'antd';
+
+import { useInput } from '../../hooks/useInput';
+
+import FileUpload from '../../components/steps/FileUpload';
+import RouterButton from '../../components/RouterButton';
 
 const { Step } = Steps;
 
@@ -22,45 +25,53 @@ const steps = [
 ];
 
 const AddTrack: FC = () => {
+  const router = useRouter();
+
   const [current, setCurrent] = useState(0);
   const [picture, setPicture] = useState<any>(null);
   const [audio, setAudio] = useState<any>(null);
+
   const title = useInput('');
   const author = useInput('');
   const text = useInput('');
-  const router = useRouter();
+
+  console.log(typeof picture, audio);
 
   const complete = () => {
-    message.success('Processing complete!');
     const formData = new FormData();
+
     formData.append('title', title.value);
     formData.append('text', text.value);
     formData.append('author', author.value);
     formData.append('picture', picture);
     formData.append('audio', audio);
+
     axios
       .post('http://localhost:5000/tracks', formData)
       .then(() => router.push('/tracks'))
-      .catch((e) => console.log(e));
+      .catch(() => {
+        return message.error('Something went wrong...');
+      });
+
+    message.success('Processing complete!');
     setCurrent(0);
   };
 
   return (
     <>
       <Head>
-        <title>Добавление песни</title>
+        <title>Adding a track</title>
       </Head>
-      <RouterButton href="/tracks" key="fasfas" type="primary">
-        Назад
+      <RouterButton href="/tracks" type="primary">
+        Back to tracks
       </RouterButton>
-      <h1>Загрузка трека</h1>{' '}
+      <h1>Upload track</h1>
       <Steps current={current}>
         {steps.map((item) => (
           <Step key={item.title} />
         ))}
       </Steps>
       <div className="steps-content">
-        {' '}
         {current === 0 && (
           <Form
             name="wrap"
@@ -70,43 +81,43 @@ const AddTrack: FC = () => {
             wrapperCol={{ flex: '500px' }}
             colon={false}
           >
-            <Form.Item label="Название трека" name="title" rules={[{ required: true }]}>
+            <Form.Item label="Name of the track" name="title" rules={[{ required: true }]}>
               <Input {...title} />
             </Form.Item>
 
-            <Form.Item label="Исполнитель" name="author" rules={[{ required: true }]}>
+            <Form.Item label="Track artist" name="author" rules={[{ required: true }]}>
               <Input {...author} />
             </Form.Item>
-            <Form.Item label="Текст песни" name="text" rules={[{ required: false }]}>
+            <Form.Item label="Lyrics" name="text" rules={[{ required: false }]}>
               <Input {...text} />
             </Form.Item>
           </Form>
         )}
         {current === 1 && (
           <FileUpload setFile={setPicture} accept="image/*">
-            Загрузите обложку
+            Upload cover
           </FileUpload>
         )}
         {current === 2 && (
           <FileUpload setFile={setAudio} accept="audio/*">
-            Загрузите аудио
+            Upload track
           </FileUpload>
         )}
       </div>
       <div className="steps-action">
         {current < steps.length - 1 && (
           <Button type="primary" onClick={() => setCurrent(current + 1)}>
-            Далее
+            Next step
           </Button>
         )}
         {current === steps.length - 1 && (
           <Button type="primary" onClick={complete}>
-            Закончить
+            Сomplete
           </Button>
         )}
         {current > 0 && (
           <Button style={{ margin: '0 8px' }} onClick={() => setCurrent(current - 1)}>
-            Назад
+            To previous
           </Button>
         )}
       </div>

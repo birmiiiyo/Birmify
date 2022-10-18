@@ -2,10 +2,10 @@ import { Track } from './track.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
-export type AlbumDocument = Album & mongoose.Document;
+export type PlaylistDocument = Playlist & mongoose.Document;
 
 @Schema()
-export class Album {
+export class Playlist {
   @Prop()
   title: string;
 
@@ -17,4 +17,4 @@ export class Album {
   tracks: Track[];
 }
 
-export const AlbumSchema = SchemaFactory.createForClass(Album);
+export const PlaylistSchema = SchemaFactory.createForClass(Playlist);

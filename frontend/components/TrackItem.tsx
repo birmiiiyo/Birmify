@@ -31,7 +31,7 @@ export const TrackItem: FC<ITrack> = ({
       >
         play
       </Button>
-      <RouterButton href={'/tracks/' + _id} key="431gsd3" type="primary">
+      <RouterButton href={'tracks/' + _id} type="primary">
         To track
       </RouterButton>
     </div>

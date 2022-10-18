@@ -1,15 +1,18 @@
-import { Layout, Menu } from 'antd';
-import { FC, useState } from 'react';
-const { Sider, Content } = Layout;
+import { FC } from 'react';
 import { useRouter } from 'next/router';
+
+import { Layout, Menu } from 'antd';
 import MenuItem from 'antd/lib/menu/MenuItem';
+
 import Player from './Player';
-const { SubMenu } = Menu;
+
+const { Sider, Content } = Layout;
+
 const items = [
-  { key: 1, label: 'Авторизация', disabled: true },
-  { key: 2, label: 'Главная', disabled: false, href: '/' },
-  { key: 3, label: 'Треки', disabled: false, href: '/tracks' },
-  { key: 4, label: 'Альбомы', disabled: false, href: '/albums' },
+  { key: 1, label: 'Auth', disabled: true },
+  { key: 2, label: 'Home', disabled: false, href: '/' },
+  { key: 3, label: 'Tracks', disabled: false, href: '/tracks' },
+  { key: 4, label: 'Playlist', disabled: false, href: '/playlists' },
 ];
 
 type LayoutProps = {
@@ -33,14 +36,7 @@ const MainLayout: FC<LayoutProps> = ({ children }) => {
           ))}
         </Menu>
       </Sider>
-      <Content
-        style={{
-          padding: '20px',
-          marginBottom: '60px',
-        }}
-      >
-        {children}
-      </Content>
+      <Content>{children}</Content>
       <Player />
     </Layout>
   );

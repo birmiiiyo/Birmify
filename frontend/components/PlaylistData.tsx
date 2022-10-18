@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
-import { IAlbum } from '../models/Album';
+
+import { IPlaylist } from '../models/Playlist';
+
 import RouterButton from './RouterButton';
 
-export const AlbumData: FC<IAlbum> = ({ _id, description, likes, title, tracks }) => {
+export const AlbumData: FC<IPlaylist> = ({ _id, description, likes, title, tracks }) => {
   return (
     <div>
       <h2>{title}</h2>

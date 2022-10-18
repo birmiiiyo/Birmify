@@ -1,4 +1,4 @@
-import { AlbumModule } from './album.module';
+import { PlaylistModule } from './playlist.module';
 import { TrackModule } from './track.module';
 import { FileModule } from './file.module';
 import { ConfigModule } from '@nestjs/config';
@@ -17,7 +17,7 @@ import { join } from 'path';
     MongooseModule.forRoot(`${process.env.MONGODB_URL}`),
     TrackModule,
     FileModule,
-    AlbumModule,
+    PlaylistModule,
   ],
 })
 export class AppModule {}

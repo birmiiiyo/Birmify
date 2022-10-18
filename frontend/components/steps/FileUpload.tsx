@@ -1,6 +1,9 @@
-import { CheckCircleOutlined, DownloadOutlined } from '@ant-design/icons';
 import React, { useRef, useState } from 'react';
+
+import { CheckCircleOutlined, DownloadOutlined } from '@ant-design/icons';
+
 import styles from '../../styles/FileUpload.module.scss';
+
 interface FileUploadProps {
   setFile: Function;
   accept: string;

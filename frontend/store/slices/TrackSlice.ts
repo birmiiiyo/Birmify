@@ -1,14 +1,16 @@
-import { getTracks } from './../actions/getTracks';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { getTracks } from './../actions/getTracks';
+
 import { ITrack } from '../../models/Track';
 
-interface TracksState {
+interface TrackState {
   tracks: ITrack[];
   isLoading: boolean;
   Error: string;
 }
 
-const initialState: TracksState = {
+const initialState: TrackState = {
   tracks: [],
   isLoading: false,
   Error: '',

@@ -1,6 +1,6 @@
 import { ITrack } from './Track';
 
-export interface IAlbum {
+export interface IPlaylist {
   _id: string;
   title: string;
   description: string;

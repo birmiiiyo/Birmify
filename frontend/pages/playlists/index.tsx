@@ -9,8 +9,8 @@ import RouterButton from '../../components/RouterButton';
 import { useAppSelector } from '../../hooks/Redux';
 import { ErrorMessage } from '../../components/ErrorMessage';
 
-const Tracks: FC = () => {
-  const { Error } = useAppSelector((state) => state.TrackReducer);
+const Playlists: FC = () => {
+  const { Error } = useAppSelector((state) => state.PlaylistReducer);
 
   if (Error) {
     return <ErrorMessage>{Error}</ErrorMessage>;
@@ -19,14 +19,14 @@ const Tracks: FC = () => {
   return (
     <>
       <Head>
-        <title>Page with tracks</title>
+        <title>Page with playlists</title>
       </Head>
       <Layout>
         <PageHeader
-          title="Tracks"
+          title="Playlists"
           extra={[
-            <RouterButton href="tracks/add" type="primary">
-              Add track
+            <RouterButton href="playlists/create" type="primary">
+              Create playlist
             </RouterButton>,
             <Button onClick={() => Router.back()} type="primary">
               To previous
@@ -39,4 +39,4 @@ const Tracks: FC = () => {
   );
 };
 
-export default Tracks;
+export default Playlists;

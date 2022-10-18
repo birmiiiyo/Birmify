@@ -22,11 +22,10 @@ const Player: FC = () => {
       audio.play();
     }
   }, [active]);
+
   const setAudio = () => {
     if (active) {
       audio.src = 'http://localhost:5000/' + active.audio;
-      console.log(audio.src);
-
       audio.volume = volume / 100;
       audio.onloadedmetadata = () => {
         dispatch(setDuration(Math.ceil(audio.duration)));
@@ -59,22 +58,16 @@ const Player: FC = () => {
   }
   return (
     <div className={styles.player}>
-      {' '}
       <Button type="text" onClick={Play}>
-        {pause ? <PlayCircleOutlined /> : <PauseCircleOutlined />}{' '}
-      </Button>{' '}
+        {pause ? <PlayCircleOutlined /> : <PauseCircleOutlined />}
+      </Button>
       <div className={styles.info}>
-        <h3>Название: {active.title}</h3>
-        <h5>Исполнитель: {active.author} </h5>
+        <h3>Name: {active.title}</h3>
+        <h5>Artist: {active.author} </h5>
       </div>
-      <TrackProgress
-        left={currentTime}
-        right={duration}
-        onChange={ChangeCurrentTime}
-        margin="10%"
-      />
-      <SoundOutlined style={{ marginLeft: 'auto' }} />
-      <TrackProgress left={volume} right={100} onChange={ChangeVolume} margin="20px" />
+      <TrackProgress left={currentTime} right={duration} onChange={ChangeCurrentTime} />
+      <SoundOutlined />
+      <TrackProgress left={volume} right={100} onChange={ChangeVolume} />
     </div>
   );
 };

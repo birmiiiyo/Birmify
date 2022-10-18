@@ -1,5 +1,6 @@
-import { ITrack } from './../../models/Track';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { ITrack } from './../../models/Track';
 
 interface PlayerState {
   active: null | ITrack;

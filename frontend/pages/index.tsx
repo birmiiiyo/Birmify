@@ -1,10 +1,16 @@
 import type { NextPage } from 'next';
 
+import { Typography } from 'antd';
+
+const { Title } = Typography;
+
 const Home: NextPage = () => {
   return (
     <>
-      <h1>Добро пожаловать</h1>
-      <h3>Здесь вы можете послушать любимые треки и добавить если их нет</h3>
+      <Title level={2}>I'm glad to see you</Title>
+      <Title level={3}>
+        Here you can listen to music, add your own, find or create your playlist
+      </Title>
     </>
   );
 };

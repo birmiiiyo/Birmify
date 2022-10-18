@@ -1,6 +1,6 @@
-import { Form, Input } from 'antd';
 import React, { FC } from 'react';
-import styles from '../../styles/FileUpload.module.scss';
+
+import { Form, Input } from 'antd';
 
 interface DataProps {
   title: any;
