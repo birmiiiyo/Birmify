@@ -1,16 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import Head from 'next/head';
 import Router from 'next/router';
 
-import { Button, Layout, PageHeader } from 'antd';
+import { Button, Empty, Layout, PageHeader, Space, Spin } from 'antd';
 
 import RouterButton from '../../components/RouterButton';
-import { useAppSelector } from '../../hooks/Redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/Redux';
 import { ErrorMessage } from '../../components/ErrorMessage';
+import { TrackItem } from '../../components/TrackItem';
+import { getTracks } from '../../store/actions/getTracks';
 
 const Tracks: FC = () => {
-  const { Error } = useAppSelector((state) => state.TrackReducer);
+  const dispatch = useAppDispatch();
+  const { tracks, isLoading, Error } = useAppSelector((state) => state.TrackReducer);
+
+  useEffect(() => {
+    dispatch(getTracks());
+  }, []);
 
   if (Error) {
     return <ErrorMessage>{Error}</ErrorMessage>;
@@ -33,7 +40,14 @@ const Tracks: FC = () => {
             </Button>,
           ]}
         />
-        {/* тута отрисовка массива с треками */}
+        <Space direction="vertical" size="large">
+          {isLoading && <Spin size="large" />}
+          {tracks.length === 0 ? (
+            <Empty />
+          ) : (
+            tracks.map((item) => <TrackItem key={item._id} {...item} />)
+          )}
+        </Space>
       </Layout>
     </>
   );

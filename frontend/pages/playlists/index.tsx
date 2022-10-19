@@ -1,17 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import Head from 'next/head';
 import Router from 'next/router';
 
-import { Button, Layout, PageHeader } from 'antd';
+import { Button, Empty, Layout, PageHeader, Spin } from 'antd';
 
 import RouterButton from '../../components/RouterButton';
-import { useAppSelector } from '../../hooks/Redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/Redux';
 import { ErrorMessage } from '../../components/ErrorMessage';
+import { getPlaylists } from '../../store/actions/getPlaylists';
+import { PlaylistItem } from '../../components/PlaylistItem';
+import { Modal } from '../../components/Modal';
 
 const Playlists: FC = () => {
-  const { Error } = useAppSelector((state) => state.PlaylistReducer);
+  const dispatch = useAppDispatch();
+  const { playlists, isLoading, Error } = useAppSelector((state) => state.PlaylistReducer);
 
+  useEffect(() => {
+    dispatch(getPlaylists());
+  }, []);
   if (Error) {
     return <ErrorMessage>{Error}</ErrorMessage>;
   }
@@ -33,7 +40,12 @@ const Playlists: FC = () => {
             </Button>,
           ]}
         />
-        {/* тута отрисовка массива с треками */}
+        {isLoading && <Spin size="large" />}
+        {playlists.length === 0 ? (
+          <Empty />
+        ) : (
+          playlists.map((item) => <PlaylistItem key={item._id} {...item} />)
+        )}
       </Layout>
     </>
   );

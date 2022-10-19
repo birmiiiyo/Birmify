@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Card, Space } from 'antd';
 import React, { FC } from 'react';
 import { useAppDispatch } from '../hooks/Redux';
 import { ITrack } from '../models/Track';
@@ -19,21 +19,25 @@ export const TrackItem: FC<ITrack> = ({
   const dispatch = useAppDispatch();
   const { setActive, setPlay } = PlayerSlice.actions;
   return (
-    <div>
-      <h2>{title}</h2>
-      <span>{text}</span>
-      <div>{author}</div>
-      <Button
-        onClick={() => {
-          dispatch(setActive({ __v, _id, audio, author, comments, listens, picture, text, title }));
-          dispatch(setPlay());
-        }}
-      >
-        play
-      </Button>
-      <RouterButton href={'tracks/' + _id} type="primary">
-        To track
-      </RouterButton>
-    </div>
+    <Card title={'Name: ' + title} size="default" style={{ margin: '10px' }}>
+      <p>Artist: {author}</p>
+      <p>Auditions: {listens}</p>
+      <Space size="large">
+        <Button
+          type="primary"
+          onClick={() => {
+            dispatch(
+              setActive({ __v, _id, audio, author, comments, listens, picture, text, title }),
+            );
+            dispatch(setPlay());
+          }}
+        >
+          play
+        </Button>
+        <RouterButton href={'tracks/' + _id} type="primary">
+          To track
+        </RouterButton>
+      </Space>
+    </Card>
   );
 };

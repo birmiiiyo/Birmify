@@ -6,4 +6,7 @@ module.exports = {
   images: {
     domains: ['localhost'],
   },
+  experimental: {
+    forceSwcTransforms: true,
+  },
 };
