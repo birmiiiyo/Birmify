@@ -40,14 +40,12 @@ const Tracks: FC = () => {
             </Button>,
           ]}
         />
-        <Space direction="vertical" size="large">
-          {isLoading && <Spin size="large" />}
-          {tracks.length === 0 ? (
-            <Empty />
-          ) : (
-            tracks.map((item) => <TrackItem key={item._id} {...item} />)
-          )}
-        </Space>
+        {isLoading && <Spin size="large" />}
+        {tracks.length === 0 ? (
+          <Empty />
+        ) : (
+          tracks.map((item) => <TrackItem key={item._id} {...item} />)
+        )}
       </Layout>
     </>
   );

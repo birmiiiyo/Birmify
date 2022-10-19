@@ -11,14 +11,18 @@ import { ErrorMessage } from '../../components/ErrorMessage';
 import { getPlaylists } from '../../store/actions/getPlaylists';
 import { PlaylistItem } from '../../components/PlaylistItem';
 import { Modal } from '../../components/Modal';
+import { CreatePlaylist } from '../../components/CreatePlaylist';
 
 const Playlists: FC = () => {
   const dispatch = useAppDispatch();
+
+  const [activeCreate, setActiveCreate] = useState<boolean>(false);
   const { playlists, isLoading, Error } = useAppSelector((state) => state.PlaylistReducer);
 
   useEffect(() => {
     dispatch(getPlaylists());
   }, []);
+
   if (Error) {
     return <ErrorMessage>{Error}</ErrorMessage>;
   }
@@ -32,14 +36,15 @@ const Playlists: FC = () => {
         <PageHeader
           title="Playlists"
           extra={[
-            <RouterButton href="playlists/create" type="primary">
+            <Button onClick={() => setActiveCreate(!activeCreate)} type="primary">
               Create playlist
-            </RouterButton>,
+            </Button>,
             <Button onClick={() => Router.back()} type="primary">
               To previous
             </Button>,
           ]}
         />
+
         {isLoading && <Spin size="large" />}
         {playlists.length === 0 ? (
           <Empty />
@@ -47,6 +52,9 @@ const Playlists: FC = () => {
           playlists.map((item) => <PlaylistItem key={item._id} {...item} />)
         )}
       </Layout>
+      <Modal active={activeCreate} setActive={setActiveCreate}>
+        <CreatePlaylist />
+      </Modal>
     </>
   );
 };

@@ -8,7 +8,6 @@ export type PlaylistDocument = Playlist & mongoose.Document;
 export class Playlist {
   @Prop()
   title: string;
-
   @Prop()
   description: string;
   @Prop()

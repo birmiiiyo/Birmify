@@ -43,7 +43,9 @@ export class PlaylistService {
   async addTrack(dto: addTrackDto): Promise<string> {
     const playlist = await this.PlaylistModel.findById(dto.playlistId);
     const track = await this.TrackModel.findById(dto.trackId);
-    if (playlist?.tracks.includes(track?._id)) return 'Трек уже есть в альбоме';
+    if (playlist?.tracks.includes(track?._id)) {
+      return 'Трек уже есть в плейлисте';
+    }
     playlist?.tracks.push(track?._id);
     await playlist?.save();
     return track?.title as string;

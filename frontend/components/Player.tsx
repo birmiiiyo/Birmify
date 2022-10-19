@@ -1,9 +1,9 @@
 import { PauseCircleOutlined, PlayCircleOutlined, SoundOutlined } from '@ant-design/icons';
-import { Button, Col, Divider, Grid, Row } from 'antd';
+import { Button, Col, Divider, Grid, Row, Space } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
-import styles from '../styles/Player.module.scss';
+import styles from '../styles/player.module.scss';
 import TrackProgress from './TrackProgress';
 let audio: any;
 
@@ -58,16 +58,24 @@ const Player: FC = () => {
   }
   return (
     <div className={styles.player}>
-      <Button type="text" onClick={Play}>
-        {pause ? <PlayCircleOutlined /> : <PauseCircleOutlined />}
-      </Button>
-      <div className={styles.info}>
-        <h3>Name: {active.title}</h3>
-        <h5>Artist: {active.author} </h5>
+      <div className={styles.main}>
+        <Button type="text" onClick={Play}>
+          {pause ? <PlayCircleOutlined /> : <PauseCircleOutlined />}
+        </Button>
+        <div className={styles.info}>
+          <h3>Name: {active.title}</h3>
+          <h5>Artist: {active.author} </h5>
+        </div>
       </div>
-      <TrackProgress left={currentTime} right={duration} onChange={ChangeCurrentTime} />
-      <SoundOutlined />
-      <TrackProgress left={volume} right={100} onChange={ChangeVolume} />
+      <TrackProgress
+        left={String(currentTime)}
+        right={String(duration)}
+        onChange={ChangeCurrentTime}
+      />
+      <div className={styles.sound}>
+        <SoundOutlined />
+        <TrackProgress left={volume} right={100} onChange={ChangeVolume} />
+      </div>
     </div>
   );
 };

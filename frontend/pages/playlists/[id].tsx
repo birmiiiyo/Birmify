@@ -26,7 +26,7 @@ const Album: FC<TrackProps> = ({ Playlist }) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const res = await axios.get<IPlaylist>(
-      `${process.env.NEXT_PUBLIC_API_key}/albums/${params?.id}`,
+      `${process.env.NEXT_PUBLIC_API_key}/playlists/${params?.id}`,
     );
 
     return { props: { Playlist: res.data } };

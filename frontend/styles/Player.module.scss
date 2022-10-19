@@ -5,9 +5,20 @@
   position: fixed;
   bottom: 0;
   display: flex;
+  justify-content: space-around;
   align-items: center;
   padding: 10px 30px;
   border: 2px solid gray;
   margin-bottom: 5px;
   background-color: rgb(254, 254, 254);
+}
+.sound {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 160px;
+}
+.main {
+  display: flex;
+  align-items: center;
 }

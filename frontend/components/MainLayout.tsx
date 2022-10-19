@@ -36,7 +36,14 @@ const MainLayout: FC<LayoutProps> = ({ children }) => {
           ))}
         </Menu>
       </Sider>
-      <Content>{children}</Content>
+      <Content
+        style={{
+          margin: '10px',
+          padding: '10px',
+        }}
+      >
+        {children}
+      </Content>
       <Player />
     </Layout>
   );
