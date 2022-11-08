@@ -7,8 +7,8 @@ interface ModalProps {
   children: ReactNode;
 }
 
-export const Modal: FC<ModalProps> = ({ active, setActive, children }) => {
-  return ReactDOM.createPortal(
+export const Modal: FC<ModalProps> = ({ active, setActive, children }) =>
+  ReactDOM.createPortal(
     <div className={active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>
       <div
         className={active ? 'modal__content active' : 'modal__content'}
@@ -19,4 +19,3 @@ export const Modal: FC<ModalProps> = ({ active, setActive, children }) => {
     </div>,
     document.body,
   );
-};

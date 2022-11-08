@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -8,6 +9,6 @@ export const getTracks = createAsyncThunk('tracks/getAll', async (_, thunkApi) =
     const response = await axios.get<ITrack[]>(process.env.NEXT_PUBLIC_API_key + '/tracks');
     return response.data;
   } catch (error) {
-    return thunkApi.rejectWithValue('Something went wrong...' + error);
+    return thunkApi.rejectWithValue('Something went wrong: ' + error);
   }
 });

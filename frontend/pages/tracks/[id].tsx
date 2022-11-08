@@ -3,11 +3,13 @@ import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { message } from 'antd';
+import { Button, Input, message } from 'antd';
 
 import { useInput } from '../../hooks/useInput';
 
 import { ITrack } from '../../models/Track';
+import Image from 'next/image';
+import { IComment } from '../../models/Comment';
 
 interface TrackProps {
   fullDataTrack: ITrack;
@@ -26,19 +28,49 @@ const TrackPage: FC<TrackProps> = ({ fullDataTrack }) => {
         text: commentText.value,
         trackId: track._id,
       });
-      if (track.comments !== null) {
-        setTrack({ ...track, comments: [...track.comments, response.data] });
-      }
+      setTrack({
+        ...track,
+        comments: track.comments?.concat(response.data) as IComment[],
+      });
+      location.reload();
     } catch (error) {
       message.success('Processing complete!');
     }
-    track.comments?.map((item) => console.log(item.username));
   };
   return (
     <>
       <Head>
         <title>{track.title}</title>
       </Head>
+      <div>
+        <Image
+          src={process.env.NEXT_PUBLIC_API_key + '/' + track?.picture}
+          width={100}
+          height={100}
+          alt="logo of track"
+        />
+        <h1>Title: {track.title}</h1>
+        <h2>Author: {track.author}</h2>
+
+        <h5>listens: {track.listens}</h5>
+        <div>
+          <div>
+            <h3>Добавить новый комментарий</h3>
+
+            <Input placeholder="username" {...commentUser} />
+            <Input placeholder="text" {...commentText} />
+            <Button onClick={() => addComment()}>Добавить</Button>
+          </div>
+        </div>
+        <h5>Comm section:</h5>
+        <ol>
+          {track.comments?.map((item) => (
+            <li>
+              {item.text} by {item.username}
+            </li>
+          ))}
+        </ol>
+      </div>
     </>
   );
 };
