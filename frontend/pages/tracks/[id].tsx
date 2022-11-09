@@ -43,30 +43,35 @@ const TrackPage: FC<TrackProps> = ({ fullDataTrack }) => {
         <title>{track.title}</title>
       </Head>
       <div>
-        <Image
-          src={process.env.NEXT_PUBLIC_API_key + '/' + track?.picture}
-          width={100}
-          height={100}
-          alt="logo of track"
-        />
-        <h1>Title: {track.title}</h1>
-        <h2>Author: {track.author}</h2>
+        <div className="about">
+          <Image
+            src={process.env.NEXT_PUBLIC_API_key + '/' + track?.picture}
+            width={300}
+            height={150}
+            alt="logo of track"
+          />
+          <div className="info">
+            <h1>Title: {track.title}</h1>
+            <h2>Author: {track.author}</h2>
 
-        <h5>listens: {track.listens}</h5>
-        <div>
-          <div>
-            <h3>Добавить новый комментарий</h3>
-
-            <Input placeholder="username" {...commentUser} />
-            <Input placeholder="text" {...commentText} />
-            <Button onClick={() => addComment()}>Добавить</Button>
+            <h5>listens: {track.listens}</h5>
           </div>
         </div>
-        <h5>Comm section:</h5>
+        <div>
+          <div className="input-area">
+            <h3>Добавить новый комментарий</h3>
+            <Input placeholder="username" {...commentUser} />
+            <Input placeholder="text" {...commentText} />
+            <Button onClick={() => addComment()} type="primary">
+              Добавить
+            </Button>
+          </div>
+        </div>
+        <h3>Comm section:</h3>
         <ol>
           {track.comments?.map((item) => (
             <li>
-              {item.text} by {item.username}
+              <i>{item.username}</i> said: <strong>{item.text}.</strong>
             </li>
           ))}
         </ol>

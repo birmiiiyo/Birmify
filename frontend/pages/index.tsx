@@ -1,17 +1,22 @@
 import type { NextPage } from 'next';
 
-import { Typography } from 'antd';
-
-const { Title } = Typography;
+import Image from 'next/image';
+import { useLayoutEffect } from 'react';
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Title level={2}>I'm glad to see you</Title>
-      <Title level={3}>
-        Here you can listen to music, add your own, find or create your playlist
-      </Title>
-    </>
+    <div className="home_img">
+      <h3>Home page</h3>
+      <Image
+        src="https://boundingintocomics.com/wp-content/uploads/2022/10/2022.10.26-02.38-boundingintocomics-63589db92ede2.png"
+        width={600}
+        height={400}
+      />
+      <div>
+        <h1>Birmify</h1>
+        <code> by BirmiiiYo</code>
+      </div>
+    </div>
   );
 };
 

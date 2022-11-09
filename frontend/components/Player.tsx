@@ -1,5 +1,6 @@
 import { PauseCircleOutlined, PlayCircleOutlined, SoundOutlined } from '@ant-design/icons';
 import { Button, Col, Divider, Grid, Row, Space } from 'antd';
+import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/Redux';
 import { PlayerSlice } from '../store/slices/PlayerSlice';
@@ -53,6 +54,11 @@ const Player: FC = () => {
     audio.currentTime = Number(e.target.value);
     dispatch(setCurrentTime(Number(e.target.value)));
   };
+  if (currentTime === 60) {
+    console.log('post');
+
+    axios.post(process.env.NEXT_PUBLIC_API_key + '/tracks/listen/' + active?._id);
+  }
   if (!active) {
     return null;
   }

@@ -30,3 +30,35 @@ a {
 .steps-action {
   margin-top: 24px;
 }
+
+.home_img {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  > div:last-child {
+    color: green;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  & .info {
+    margin-left: 20px;
+    font-size: 18px;
+  }
+}
+
+.input-area {
+  max-width: 300px;
+  padding-top: 20px;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
