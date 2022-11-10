@@ -1,1 +1,1 @@
-### `1st test app FullStack app`
+### `1st FullStack app`

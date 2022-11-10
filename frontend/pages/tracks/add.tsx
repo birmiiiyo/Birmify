@@ -9,6 +9,7 @@ import { useInput } from '../../hooks/useInput';
 
 import FileUpload from '../../components/steps/FileUpload';
 import RouterButton from '../../components/RouterButton';
+import { openNotification } from '../../helper/notofication';
 
 const { Step } = Steps;
 
@@ -35,26 +36,29 @@ const AddTrack: FC = () => {
   const author = useInput('');
   const text = useInput('');
 
-  console.log(typeof picture, audio);
-
   const complete = () => {
-    const formData = new FormData();
+    try {
+      if (title.value.length < 3) throw 'Title too short';
+      if (author.value.length < 3) throw 'Author name too short';
 
-    formData.append('title', title.value);
-    formData.append('text', text.value);
-    formData.append('author', author.value);
-    formData.append('picture', picture);
-    formData.append('audio', audio);
+      const formData = new FormData();
+      formData.append('title', title.value);
+      formData.append('text', text.value);
+      formData.append('author', author.value);
+      formData.append('picture', picture);
+      formData.append('audio', audio);
 
-    axios
-      .post('http://localhost:5000/tracks', formData)
-      .then(() => router.push('/tracks'))
-      .catch(() => {
-        return message.error('Something went wrong...');
-      });
-
-    message.success('Processing complete!');
-    setCurrent(0);
+      axios
+        .post('http://localhost:5000/tracks', formData)
+        .then(() => router.push('/tracks'))
+        .catch(() => {
+          return message.error('Something went wrong...');
+        });
+      setCurrent(0);
+      openNotification('bottomRight', 'Added');
+    } catch (error) {
+      message.warning(error);
+    }
   };
 
   return (

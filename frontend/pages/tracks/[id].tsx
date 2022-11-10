@@ -10,6 +10,7 @@ import { useInput } from '../../hooks/useInput';
 import { ITrack } from '../../models/Track';
 import Image from 'next/image';
 import { IComment } from '../../models/Comment';
+import { openNotification } from '../../helper/notofication';
 
 interface TrackProps {
   fullDataTrack: ITrack;
@@ -23,6 +24,9 @@ const TrackPage: FC<TrackProps> = ({ fullDataTrack }) => {
 
   const addComment = async () => {
     try {
+      if (commentText.value.length < 3 && commentUser.value.length < 5) {
+        throw 'comment is too short';
+      }
       const response = await axios.post(`http://localhost:5000/tracks/comments`, {
         username: commentUser.value,
         text: commentText.value,
@@ -32,9 +36,9 @@ const TrackPage: FC<TrackProps> = ({ fullDataTrack }) => {
         ...track,
         comments: track.comments?.concat(response.data) as IComment[],
       });
-      location.reload();
+      openNotification('bottomRight', 'successfully added');
     } catch (error) {
-      message.success('Processing complete!');
+      message.warning(error);
     }
   };
   return (

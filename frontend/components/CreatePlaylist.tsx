@@ -2,12 +2,16 @@ import { Button, Form, Input, message, Space } from 'antd';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
+import { openNotification } from '../helper/notofication';
 
 export const CreatePlaylist: FC = () => {
   const router = useRouter();
   const onFinish = (values: any) => {
     axios.post(process.env.NEXT_PUBLIC_API_key + '/playlists', values);
-    message.success('successfully created, it`s time to add tracks to the new album');
+    openNotification(
+      'bottomRight',
+      'successfully created, it`s time to add tracks to the new plaulist',
+    );
     router.push('/tracks');
   };
 
